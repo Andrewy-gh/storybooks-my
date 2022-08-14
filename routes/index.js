@@ -7,10 +7,13 @@ const { ensureAuth, ensureGuest } = require('../middleware/auth');
 router.get('/', ensureGuest, (req, res) => {
   res.render('login', { layout: 'login' });
 });
+
 // @desc Dashboard
 // @route GET /dasboard
 router.get('/dashboard', ensureAuth, (req, res) => {
-  res.render('dashboard');
+  res.render('dashboard', {
+    name: req.user.firstName,
+  });
 });
 
 module.exports = router;
